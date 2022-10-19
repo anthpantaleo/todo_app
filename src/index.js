@@ -1,3 +1,4 @@
 import "./styles.css";
 import { todo } from "./todo";
-import { storageControl } from "./generalDom";
+import { generalApp } from "./generalDom";
+import { taskModule, Task } from "./tasks";

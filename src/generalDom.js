@@ -1,4 +1,4 @@
-const storageControl = (() => {
+const generalApp = (() => {
   window.addEventListener("load", () => {
     // Initial DOM queries
     const nameImput = document.getElementById("name");
@@ -42,7 +42,7 @@ const storageControl = (() => {
       }
     };
 
-    // Add Task Modal
+    // Open Add Task Modal
 
     addTaskButton.addEventListener("click", function (e) {
       taskModal.classList.add("active");
@@ -63,4 +63,4 @@ const storageControl = (() => {
   });
 })();
 
-export { storageControl };
+export { generalApp };
