@@ -6,7 +6,7 @@ const storageControl = (() => {
 
     let initialDate = new Date();
     let initalTime = initialDate.toLocaleTimeString();
-    info.textContent = initalTime;
+    info.textContent = `${initialDate.toDateString()}, ${initalTime}`;
 
     // Storage
 
@@ -40,7 +40,7 @@ const storageControl = (() => {
     setInterval(function getDisplayTime() {
       let currentDate = new Date();
       let current = currentDate.toLocaleTimeString();
-      info.textContent = current;
+      info.textContent = `${currentDate.toDateString()}, ${current}`;
     }, 1000);
   });
 })();
