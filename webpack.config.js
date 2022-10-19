@@ -6,6 +6,7 @@ module.exports = {
     index: "./src/index.js",
 
     todo: "./src/todo.js",
+    generalDomControl: "./src/generalDom.js",
   },
   devtool: "inline-source-map",
   output: {

@@ -1,3 +1,43 @@
-.content {
-  color: purple;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
+:root {
+  --primary-color: #edf2fc;
+  --secondary-color: #212121;
+}
+
+.dark-theme {
+  --primary-color: #212121;
+  --secondary-color: #edf2fc;
+}
+
+html {
+  margin: 0 auto;
+  max-width: 1024px;
+}
+
+* {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+nav {
+  display: flex;
+  align-items: center;
+}
+
+#icon {
+  height: 32px;
+  width: auto;
+  margin-left: auto;
+  cursor: pointer;
 }
