@@ -1,9 +1,11 @@
 const storageControl = (() => {
   window.addEventListener("load", () => {
+    // Initial DOM queries
     const nameImput = document.getElementById("name");
     const themeIcon = document.getElementById("icon");
     const info = document.querySelector(".info");
 
+    // Initial Date Update
     let initialDate = new Date();
     let initalTime = initialDate.toLocaleTimeString();
     info.textContent = `${initialDate.toDateString()}, ${initalTime}`;
@@ -37,6 +39,7 @@ const storageControl = (() => {
       }
     };
 
+    // Update Time
     setInterval(function getDisplayTime() {
       let currentDate = new Date();
       let current = currentDate.toLocaleTimeString();
