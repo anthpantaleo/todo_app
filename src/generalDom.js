@@ -4,6 +4,9 @@ const storageControl = (() => {
     const nameImput = document.getElementById("name");
     const themeIcon = document.getElementById("icon");
     const info = document.querySelector(".info");
+    const addTaskButton = document.querySelector(".create");
+    const taskModal = document.querySelector(".modal-bg");
+    const modalClose = document.querySelector(".modal-close");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -38,6 +41,18 @@ const storageControl = (() => {
         localStorage.setItem("theme", "normal");
       }
     };
+
+    // Add Task Modal
+
+    addTaskButton.addEventListener("click", function (e) {
+      taskModal.classList.add("active");
+    });
+
+    // Close Modal
+
+    modalClose.addEventListener("click", function (e) {
+      taskModal.classList.remove("active");
+    });
 
     // Update Time
     setInterval(function getDisplayTime() {
