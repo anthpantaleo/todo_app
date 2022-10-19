@@ -38,6 +38,25 @@ nav {
   align-items: center;
 }
 
+input:not([type="radio"]):not([type="checkbox"]) {
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: none;
+  cursor: initial;
+}
+
+input[type="text"] {
+  background-color: var(--primary-color);
+}
+
+#name {
+  font-size: 24px;
+  width: 180px;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
 #icon {
   height: 32px;
   width: auto;

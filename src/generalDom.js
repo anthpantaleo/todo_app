@@ -1,5 +1,18 @@
+const storageControl = (() => {
+  window.addEventListener("load", () => {
+    const nameImput = document.getElementById("name");
+    const userName = localStorage.getItem("userName") || "";
+
+    nameImput.value = userName;
+
+    nameImput.addEventListener("change", (e) => {
+      localStorage.setItem("userName", e.target.value);
+    });
+  });
+})();
+
 const generalDomControl = (() => {
-  let themeIcon = document.getElementById("icon");
+  const themeIcon = document.getElementById("icon");
 
   themeIcon.onclick = function () {
     document.body.classList.toggle("dark-theme");
@@ -11,4 +24,4 @@ const generalDomControl = (() => {
   };
 })();
 
-export { generalDomControl };
+export { generalDomControl, storageControl };

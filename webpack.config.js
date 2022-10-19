@@ -4,7 +4,6 @@ module.exports = {
   mode: "development",
   entry: {
     index: "./src/index.js",
-
     todo: "./src/todo.js",
     generalDomControl: "./src/generalDom.js",
   },
