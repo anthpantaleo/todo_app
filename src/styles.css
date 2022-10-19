@@ -88,18 +88,27 @@ input[type="text"] {
   background-color: var(--secondary-color);
   color: var(--primary-color);
   border: none;
-  border-radius: 5px;
   font-size: large;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid black;
 }
 
 .createtitle button:hover {
   opacity: 0.9;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 400px) {
   #icon {
     position: relative;
     bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #icon {
+    position: relative;
+    bottom: 0px;
   }
 }
