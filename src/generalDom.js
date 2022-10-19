@@ -2,6 +2,11 @@ const storageControl = (() => {
   window.addEventListener("load", () => {
     const nameImput = document.getElementById("name");
     const themeIcon = document.getElementById("icon");
+    const info = document.querySelector(".info");
+
+    let initialDate = new Date();
+    let initalTime = initialDate.toLocaleTimeString();
+    info.textContent = initalTime;
 
     // Storage
 
@@ -31,6 +36,12 @@ const storageControl = (() => {
         localStorage.setItem("theme", "normal");
       }
     };
+
+    setInterval(function getDisplayTime() {
+      let currentDate = new Date();
+      let current = currentDate.toLocaleTimeString();
+      info.textContent = current;
+    }, 1000);
   });
 })();
 
