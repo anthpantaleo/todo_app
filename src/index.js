@@ -1,3 +1,3 @@
 import "./styles.css";
 import { todo } from "./todo";
-import { generalDomControl } from "./generalDom";
+import { storageControl } from "./generalDom";
