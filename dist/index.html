@@ -39,7 +39,7 @@
       />
     </div>
     <div class="category-display">
-      <button class="category">All</button>
+      <button class="category selectedView">All</button>
       <button class="category">
         Work <span class="categorydelete">X</span>
       </button>
@@ -47,10 +47,98 @@
     <div class="modal-bg">
       <div class="modal">
         <h2>Add a Task</h2>
-        <p>More Info Here</p>
+        <form action="#">
+          <div class="taskinput">
+            <label for="task">Task:</label>
+            <input type="text" id="taskinput" name="task" required />
+          </div>
+          <div class="taskinput">
+            <label for="description">Desc:</label>
+            <input type="text" name="description" id="descinput" />
+          </div>
+          <div class="taskinput">
+            <label for="duedate">Due:</label>
+            <input type="date" name="duedate" id="duedate" />
+          </div>
+          <div class="taskinput prioritydiv">
+            <label for="priority">priority:</label>
+            <label for="High"
+              ><svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
+                /></svg
+            ></label>
+
+            <input type="radio" name="priority" id="priority" value="high" />
+            <label for="normal">N</label>
+            <input type="radio" name="priority" id="priority" value="normal" />
+            <label for="low"
+              ><svg
+                style="width: 24px; height: 24px"
+                id="downarrow"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
+                /></svg
+            ></label>
+            <input type="radio" name="priority" id="priority" value="low" />
+          </div>
+          <div class="taskinput"><button id="submitTask">Add</button></div>
+        </form>
         <span class="modal-close">X</span>
       </div>
     </div>
+    <!-- EDIT BUTTON MODAL -->
+    <!-- <div class="modal-bg">
+      <div class="modal">
+        <h2>Edit Task</h2>
+        <form action="#">
+          <div class="taskinput">
+            <label for="task">Task:</label>
+            <input type="text" id="taskinput" name="task" required />
+          </div>
+          <div class="taskinput">
+            <label for="description">Desc:</label>
+            <input type="text" name="description" id="descinput" />
+          </div>
+          <div class="taskinput">
+            <label for="duedate">Due:</label>
+            <input type="date" name="duedate" id="duedate" />
+          </div>
+          <div class="taskinput prioritydiv">
+            <label for="priority">priority:</label>
+            <label for="High"
+              ><svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
+                /></svg
+            ></label>
+
+            <input type="radio" name="priority" id="priority" value="high" />
+            <label for="normal">N</label>
+            <input type="radio" name="priority" id="priority" value="normal" />
+            <label for="low"
+              ><svg
+                style="width: 24px; height: 24px"
+                id="downarrow"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
+                /></svg
+            ></label>
+            <input type="radio" name="priority" id="priority" value="low" />
+          </div>
+          <div class="taskinput"><button id="submitTask">Add</button></div>
+        </form>
+        <span class="modal-close">X</span>
+      </div>
+    </div> -->
     <script src="./index.bundle.js"></script>
   </body>
 </html>
