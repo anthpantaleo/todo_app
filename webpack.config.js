@@ -7,6 +7,7 @@ module.exports = {
     todo: "./src/todo.js",
     generalDomControl: "./src/generalDom.js",
     tasks: "./src/tasks.js",
+    category: "./src/category.js",
   },
   devtool: "inline-source-map",
   output: {
