@@ -1,3 +1,5 @@
+import { createTask } from "./tasks";
+
 const generalApp = (() => {
   window.addEventListener("load", () => {
     // Initial DOM queries
@@ -7,6 +9,7 @@ const generalApp = (() => {
     const addTaskButton = document.querySelector(".create");
     const taskModal = document.querySelector(".modal-bg");
     const modalClose = document.querySelector(".modal-close");
+    const taskSubmitButton = document.querySelector("#submitTask");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -60,6 +63,13 @@ const generalApp = (() => {
       let current = currentDate.toLocaleTimeString();
       info.textContent = `${currentDate.toDateString()}, ${current}`;
     }, 1000);
+
+    // Task Submit to Create Task
+    taskSubmitButton.addEventListener("click", function (ev) {
+      ev.preventDefault();
+      console.log("yo");
+      createTask(ev);
+    });
   });
 })();
 
