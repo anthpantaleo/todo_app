@@ -39,11 +39,12 @@
       />
     </div>
     <div class="category-display">
-      <button class="category selectedView">All</button>
+      <button class="category selectedView">All Tasks</button>
       <button class="category">
         Work <span class="categorydelete">X</span>
       </button>
     </div>
+    <div class="taskdisplay">Task here</div>
     <div class="modal-bg">
       <div class="modal">
         <h2>Add a Task</h2>
@@ -72,7 +73,13 @@
 
             <input type="radio" name="priority" id="priority" value="high" />
             <label for="normal">N</label>
-            <input type="radio" name="priority" id="priority" value="normal" />
+            <input
+              type="radio"
+              name="priority"
+              id="priority"
+              value="normal"
+              checked
+            />
             <label for="low"
               ><svg
                 style="width: 24px; height: 24px"
