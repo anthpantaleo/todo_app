@@ -13,13 +13,6 @@ const generalApp = (() => {
     const modalClose = document.querySelector(".modal-close");
     const taskSubmitButton = document.querySelector("#submitTask");
 
-    //Task Add Queries
-    let taskinput = document.querySelector("#taskinput");
-    let taskinputDescription = document.querySelector("#descinput");
-    let taskinputDue = document.querySelector("#duedate");
-    let taskinputPriority = document.querySelector("#priority");
-    let addtaskForm = document.querySelector("#addtaskform");
-
     // Initial Date Update
     let initialDate = new Date();
     let initalTime = initialDate.toLocaleTimeString();
@@ -77,24 +70,47 @@ const generalApp = (() => {
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
       // createTask(ev);
-      let currentCreateTask = new TTask(
-        taskinput.value,
-        taskinputDescription.value,
-        taskinputDue.value,
-        taskinputPriority.value
-      );
-      removeValues();
-      console.log(currentCreateTask);
-      taskModal.classList.remove("active");
-    });
 
-    function removeValues() {
-      taskinput.value = null;
-      taskinputDescription.value = null;
-      taskinputDue.value = null;
-      taskinputPriority.value = null;
-    }
+      let taskinput = document.querySelector("#taskinput");
+      let taskinputDescription = document.querySelector("#descinput");
+      let taskinputDue = document.querySelector("#duedate");
+      let taskinputPriority = document.querySelector(
+        'input[name="priority"]:checked'
+      );
+
+      let tasklength = taskinput.value.length;
+      if (tasklength >= 2) {
+        let currentCreateTask = new TTask(
+          taskinput.value,
+          taskinputDescription.value,
+          taskinputDue.value,
+          taskinputPriority.value
+        );
+        console.log(currentCreateTask);
+        resetValues(
+          taskinput,
+          taskinputDescription,
+          taskinputDue,
+          taskinputPriority
+        );
+        taskModal.classList.remove("active");
+      } else {
+        taskModal.classList.remove("active");
+      }
+    });
   });
+
+  function resetValues(
+    taskinput,
+    taskinputDescription,
+    taskinputDue,
+    taskinputPriority
+  ) {
+    taskinput.value = null;
+    taskinputDescription.value = null;
+    taskinputDue.value = null;
+    taskinputPriority.value = null;
+  }
 })();
 
 export { generalApp };
