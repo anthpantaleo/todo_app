@@ -14,10 +14,11 @@ const generalApp = (() => {
     const taskSubmitButton = document.querySelector("#submitTask");
 
     //Task Add Queries
-    let taskinput = document.querySelector("#taskinput").value;
-    let taskinputDescription = document.querySelector("#descinput").value;
-    let taskinputDue = document.querySelector("#duedate").value;
-    let taskinputPriority = document.querySelector("#priority").value;
+    let taskinput = document.querySelector("#taskinput");
+    let taskinputDescription = document.querySelector("#descinput");
+    let taskinputDue = document.querySelector("#duedate");
+    let taskinputPriority = document.querySelector("#priority");
+    let addtaskForm = document.querySelector("#addtaskform");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -75,17 +76,24 @@ const generalApp = (() => {
     // Task Submit to Create Task
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
-      console.log("Called from General Dom", ev);
       // createTask(ev);
       let currentCreateTask = new TTask(
-        taskinput,
-        taskinputDescription,
-        taskinputDue,
-        taskinputPriority
+        taskinput.value,
+        taskinputDescription.value,
+        taskinputDue.value,
+        taskinputPriority.value
       );
+      removeValues();
       console.log(currentCreateTask);
       taskModal.classList.remove("active");
     });
+
+    function removeValues() {
+      taskinput.value = null;
+      taskinputDescription.value = null;
+      taskinputDue.value = null;
+      taskinputPriority.value = null;
+    }
   });
 })();
 
