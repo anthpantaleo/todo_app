@@ -62,26 +62,26 @@
             <input type="date" name="duedate" id="duedate" />
           </div>
           <div class="taskinput prioritydiv">
-            <label for="priority">priority:</label>
-            <label for="high"
-              ><svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
+            Priority:
+            <label for="high">
+              <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"
                   d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
-                /></svg
-            ></label>
-
-            <input type="radio" name="priority" id="priority" value="high" />
+                />
+              </svg>
+            </label>
+            <input type="radio" name="priority" id="high" value="high" />
             <label for="normal">N</label>
             <input
               type="radio"
               name="priority"
-              id="priority"
+              id="normal"
               value="normal"
               checked
             />
-            <label for="low"
-              ><svg
+            <label for="low">
+              <svg
                 style="width: 24px; height: 24px"
                 id="downarrow"
                 viewBox="0 0 24 24"
@@ -89,9 +89,10 @@
                 <path
                   fill="currentColor"
                   d="M15,20H9V12H4.16L12,4.16L19.84,12H15V20Z"
-                /></svg
-            ></label>
-            <input type="radio" name="priority" id="priority" value="low" />
+                />
+              </svg>
+            </label>
+            <input type="radio" name="priority" id="low" value="low" />
           </div>
           <div class="taskinput"><button id="submitTask">Add</button></div>
         </form>
