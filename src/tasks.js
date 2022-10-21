@@ -21,7 +21,7 @@ const taskModule = (() => {
 })();
 
 function createTask(ev) {
-  console.log("called from tasks", ev);
+  console.log("called from Create Task Function", ev);
   taskModule.testFunc(ev);
 }
 

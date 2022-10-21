@@ -67,7 +67,7 @@ const generalApp = (() => {
     // Task Submit to Create Task
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
-      console.log("yo");
+      console.log("Called from General Dom", ev);
       createTask(ev);
     });
   });
