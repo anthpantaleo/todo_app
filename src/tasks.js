@@ -13,8 +13,8 @@ const taskModule = (() => {
     }
   }
 
-  function testFunc() {
-    console.log("called from Task Module");
+  function testFunc(ev) {
+    console.log("called from Task Module", ev);
   }
 
   return { Task, testFunc };
@@ -22,7 +22,7 @@ const taskModule = (() => {
 
 function createTask(ev) {
   console.log("called from tasks", ev);
-  taskModule.testFunc();
+  taskModule.testFunc(ev);
 }
 
 export { createTask };
