@@ -1,5 +1,7 @@
 import { createTask } from "./tasks";
 
+import TTask from "./task2";
+
 const generalApp = (() => {
   window.addEventListener("load", () => {
     // Initial DOM queries
@@ -10,6 +12,12 @@ const generalApp = (() => {
     const taskModal = document.querySelector(".modal-bg");
     const modalClose = document.querySelector(".modal-close");
     const taskSubmitButton = document.querySelector("#submitTask");
+
+    //Task Add Queries
+    let taskinput = document.querySelector("#taskinput").value;
+    let taskinputDescription = document.querySelector("#descinput").value;
+    let taskinputDue = document.querySelector("#duedate").value;
+    let taskinputPriority = document.querySelector("#priority").value;
 
     // Initial Date Update
     let initialDate = new Date();
@@ -68,7 +76,15 @@ const generalApp = (() => {
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
       console.log("Called from General Dom", ev);
-      createTask(ev);
+      // createTask(ev);
+      let currentCreateTask = new TTask(
+        taskinput,
+        taskinputDescription,
+        taskinputDue,
+        taskinputPriority
+      );
+      console.log(currentCreateTask);
+      taskModal.classList.remove("active");
     });
   });
 })();
