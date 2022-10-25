@@ -14,6 +14,7 @@ const generalApp = (() => {
     const modalClose = document.querySelector(".modal-close");
     const taskSubmitButton = document.querySelector("#submitTask");
     const categoryInput = document.getElementById("category");
+    let categorySelect = document.querySelectorAll("[category]");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -161,11 +162,9 @@ const generalApp = (() => {
       deleteCategories(categoryDisplay);
       let currentCategories = JSON.parse(localStorage.getItem("categories"));
       currentCategories.forEach((element) => {
-        console.log(element.categoryname);
-      });
-      currentCategories.forEach((element) => {
         let categoryButton = document.createElement("button");
         categoryButton.classList.add("category");
+        categoryButton.setAttribute("category", `${element.categoryname}`);
         categoryButton.innerText = element.categoryname;
         if (element.categoryname != "all tasks") {
           let categoryDeleteSpan = document.createElement("span");
@@ -175,6 +174,7 @@ const generalApp = (() => {
         }
         categoryDisplay.appendChild(categoryButton);
       });
+      loadCategorySelect();
     }
 
     // Delete Existing Categories
@@ -183,6 +183,19 @@ const generalApp = (() => {
       while (x.firstChild) {
         x.removeChild(x.firstChild);
       }
+    }
+
+    // update Category Selectors and Loaders
+
+    function loadCategorySelect() {
+      categorySelect = document.querySelectorAll("[category]");
+      categorySelect.forEach((element) => {
+        if (element.getAttribute("category") == selectedCategory) {
+          element.classList.toggle("selectedView");
+        } else {
+          element.classList.remove("selectedView");
+        }
+      });
     }
   });
 })();
