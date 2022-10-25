@@ -22,6 +22,7 @@ const generalApp = (() => {
 
     const userName = localStorage.getItem("userName") || "";
     const userTheme = localStorage.getItem("theme") || "";
+    const tasksInStorage = localStorage.getItem("tasksInStorage") || "[]";
 
     nameImput.value = userName;
 
@@ -62,8 +63,8 @@ const generalApp = (() => {
     // Update Time
     setInterval(function getDisplayTime() {
       let currentDate = new Date();
-      let current = currentDate.toLocaleTimeString();
-      info.textContent = `${currentDate.toDateString()}, ${current}`;
+      let currentTime = currentDate.toLocaleTimeString();
+      info.textContent = `${currentDate.toDateString()}, ${currentTime}`;
     }, 1000);
 
     // Task Submit to Create Task
@@ -79,20 +80,26 @@ const generalApp = (() => {
       );
 
       let tasklength = taskinput.value.length;
+      let id = Math.floor(Math.random() * 100000);
       if (tasklength >= 2) {
         let currentCreateTask = new TTask(
           taskinput.value,
           taskinputDescription.value,
           taskinputDue.value,
-          taskinputPriority.value
+          taskinputPriority.value,
+          "categoryplaceholder",
+          id
         );
-        console.log(currentCreateTask);
-        resetValues(
-          taskinput,
-          taskinputDescription,
-          taskinputDue,
-          taskinputPriority
-        );
+
+        taskinput.value = null;
+        taskinputDescription.value = null;
+        taskinputDue.value = null;
+
+        let temptTasks =
+          JSON.parse(localStorage.getItem("tasksInStorage")) || [];
+        temptTasks.push(currentCreateTask);
+
+        localStorage.setItem("tasksInStroage", JSON.stringify(temptTasks));
         taskModal.classList.remove("active");
       } else {
         taskModal.classList.remove("active");
@@ -100,17 +107,10 @@ const generalApp = (() => {
     });
   });
 
-  function resetValues(
-    taskinput,
-    taskinputDescription,
-    taskinputDue,
-    taskinputPriority
-  ) {
-    taskinput.value = null;
-    taskinputDescription.value = null;
-    taskinputDue.value = null;
-    taskinputPriority.value = null;
-  }
+  // function getTasks() {
+  //   console.log(localStorage.getItem("tasksInStorage"));
+  //   return localStorage.getItem("tasksInStorage");
+  // }
 })();
 
 export { generalApp };
