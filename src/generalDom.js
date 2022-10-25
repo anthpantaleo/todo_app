@@ -1,9 +1,5 @@
-import { createTask } from "./tasks";
-
 import TTask from "./task2";
-
-let tasks = [];
-let tasksInStorage = localStorage.getItem("tasks") || [];
+import { categoryModule } from "./category";
 
 const generalApp = (() => {
   window.addEventListener("load", () => {
@@ -68,6 +64,18 @@ const generalApp = (() => {
       info.textContent = `${currentDate.toDateString()}, ${currentTime}`;
     }, 1000);
 
+    // Load Tasks
+
+    function loadTasks() {
+      if (localStorage.getItem("tasks")) {
+        console.log("Loaded Tasks");
+      } else {
+        localStorage.setItem("tasks", JSON.stringify([]));
+      }
+    }
+
+    loadTasks();
+
     // Task Submit to Create Task
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
@@ -82,7 +90,7 @@ const generalApp = (() => {
 
       let tasklength = taskinput.value.length;
       let id = Math.floor(Math.random() * 100000);
-      if (tasklength >= 2) {
+      if (tasklength >= 1) {
         let currentCreateTask = new TTask(
           taskinput.value,
           taskinputDescription.value,
@@ -92,13 +100,17 @@ const generalApp = (() => {
           id
         );
 
-        taskinput.value = null;
-        taskinputDescription.value = null;
-        taskinputDue.value = null;
+        let currentTasksInStorage = JSON.parse(localStorage.getItem("tasks"));
+
+        let tasks = currentTasksInStorage;
 
         tasks.push(currentCreateTask);
 
         localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        taskinput.value = null;
+        taskinputDescription.value = null;
+        taskinputDue.value = null;
 
         taskModal.classList.remove("active");
       } else {
@@ -106,11 +118,6 @@ const generalApp = (() => {
       }
     });
   });
-
-  // function getTasks() {
-  //   console.log(localStorage.getItem("tasksInStorage"));
-  //   return localStorage.getItem("tasksInStorage");
-  // }
 })();
 
 export { generalApp };
