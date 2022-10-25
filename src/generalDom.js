@@ -22,6 +22,8 @@ const generalApp = (() => {
 
     // Storage
 
+    // UserName
+
     const userName = localStorage.getItem("userName") || "";
     nameImput.value = userName;
 
@@ -29,12 +31,16 @@ const generalApp = (() => {
       localStorage.setItem("userName", e.target.value);
     });
 
+    // Theme
+
     if (localStorage.getItem("theme") == "dark-theme") {
       document.body.classList.toggle("dark-theme");
       themeIcon.src = "../dist/images/sunpixel.png";
     } else {
       localStorage.setItem("theme", "normal");
     }
+
+    // Theme Changer
 
     themeIcon.onclick = function () {
       document.body.classList.toggle("dark-theme");
@@ -47,6 +53,8 @@ const generalApp = (() => {
       }
     };
 
+    //Category Input
+
     categoryInput.addEventListener("change", (e) => {
       let current = new Category(e.target.value);
       let currentCategoriesInStorage = JSON.parse(
@@ -58,6 +66,8 @@ const generalApp = (() => {
       localStorage.setItem("categories", JSON.stringify(categories));
       renderCategories();
     });
+
+    // Load Categories to DOM
 
     function loadCategories() {
       if (localStorage.getItem("categories")) {
@@ -143,34 +153,38 @@ const generalApp = (() => {
         taskModal.classList.remove("active");
       }
     });
-  });
 
-  function renderCategories() {
-    const categoryDisplay = document.querySelector(".category-display");
-    deleteCategories(categoryDisplay);
-    let currentCategories = JSON.parse(localStorage.getItem("categories"));
-    currentCategories.forEach((element) => {
-      console.log(element.categoryname);
-    });
-    currentCategories.forEach((element) => {
-      let categoryButton = document.createElement("button");
-      categoryButton.classList.add("category");
-      categoryButton.innerText = element.categoryname;
-      if (element.categoryname != "all tasks") {
-        let categoryDeleteSpan = document.createElement("span");
-        categoryDeleteSpan.classList.add("categorydelete");
-        categoryDeleteSpan.innerText = "X";
-        categoryButton.appendChild(categoryDeleteSpan);
-      }
-      categoryDisplay.appendChild(categoryButton);
-    });
-  }
+    // Render Categories
 
-  function deleteCategories(x) {
-    while (x.firstChild) {
-      x.removeChild(x.firstChild);
+    function renderCategories() {
+      const categoryDisplay = document.querySelector(".category-display");
+      deleteCategories(categoryDisplay);
+      let currentCategories = JSON.parse(localStorage.getItem("categories"));
+      currentCategories.forEach((element) => {
+        console.log(element.categoryname);
+      });
+      currentCategories.forEach((element) => {
+        let categoryButton = document.createElement("button");
+        categoryButton.classList.add("category");
+        categoryButton.innerText = element.categoryname;
+        if (element.categoryname != "all tasks") {
+          let categoryDeleteSpan = document.createElement("span");
+          categoryDeleteSpan.classList.add("categorydelete");
+          categoryDeleteSpan.innerText = "X";
+          categoryButton.appendChild(categoryDeleteSpan);
+        }
+        categoryDisplay.appendChild(categoryButton);
+      });
     }
-  }
+
+    // Delete Existing Categories
+
+    function deleteCategories(x) {
+      while (x.firstChild) {
+        x.removeChild(x.firstChild);
+      }
+    }
+  });
 })();
 
 export { generalApp };
