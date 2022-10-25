@@ -1,5 +1,7 @@
 import TTask from "./task2";
-import { categoryModule } from "./category";
+import Category from "./category";
+
+let selectedCategory = "all tasks";
 
 const generalApp = (() => {
   window.addEventListener("load", () => {
@@ -11,6 +13,7 @@ const generalApp = (() => {
     const taskModal = document.querySelector(".modal-bg");
     const modalClose = document.querySelector(".modal-close");
     const taskSubmitButton = document.querySelector("#submitTask");
+    const categoryInput = document.getElementById("category");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -21,7 +24,6 @@ const generalApp = (() => {
 
     const userName = localStorage.getItem("userName") || "";
     nameImput.value = userName;
-    const userTheme = localStorage.getItem("theme") || "";
 
     nameImput.addEventListener("change", (e) => {
       localStorage.setItem("userName", e.target.value);
@@ -44,6 +46,31 @@ const generalApp = (() => {
         localStorage.setItem("theme", "normal");
       }
     };
+
+    categoryInput.addEventListener("change", (e) => {
+      let current = new Category(e.target.value);
+      let currentCategoriesInStorage = JSON.parse(
+        localStorage.getItem("categories")
+      );
+      let categories = currentCategoriesInStorage;
+      categories.push(current);
+      categoryInput.value = "";
+      localStorage.setItem("categories", JSON.stringify(categories));
+      renderCategories();
+    });
+
+    function loadCategories() {
+      if (localStorage.getItem("categories")) {
+      } else {
+        localStorage.setItem(
+          "categories",
+          JSON.stringify([{ categoryname: "all tasks" }])
+        );
+      }
+      renderCategories();
+    }
+
+    loadCategories();
 
     // Open Add Task Modal
 
@@ -68,7 +95,6 @@ const generalApp = (() => {
 
     function loadTasks() {
       if (localStorage.getItem("tasks")) {
-        console.log("Loaded Tasks");
       } else {
         localStorage.setItem("tasks", JSON.stringify([]));
       }
@@ -77,9 +103,9 @@ const generalApp = (() => {
     loadTasks();
 
     // Task Submit to Create Task
+
     taskSubmitButton.addEventListener("click", function (ev) {
       ev.preventDefault();
-      // createTask(ev);
 
       let taskinput = document.querySelector("#taskinput");
       let taskinputDescription = document.querySelector("#descinput");
@@ -118,6 +144,33 @@ const generalApp = (() => {
       }
     });
   });
+
+  function renderCategories() {
+    const categoryDisplay = document.querySelector(".category-display");
+    deleteCategories(categoryDisplay);
+    let currentCategories = JSON.parse(localStorage.getItem("categories"));
+    currentCategories.forEach((element) => {
+      console.log(element.categoryname);
+    });
+    currentCategories.forEach((element) => {
+      let categoryButton = document.createElement("button");
+      categoryButton.classList.add("category");
+      categoryButton.innerText = element.categoryname;
+      if (element.categoryname != "all tasks") {
+        let categoryDeleteSpan = document.createElement("span");
+        categoryDeleteSpan.classList.add("categorydelete");
+        categoryDeleteSpan.innerText = "X";
+        categoryButton.appendChild(categoryDeleteSpan);
+      }
+      categoryDisplay.appendChild(categoryButton);
+    });
+  }
+
+  function deleteCategories(x) {
+    while (x.firstChild) {
+      x.removeChild(x.firstChild);
+    }
+  }
 })();
 
 export { generalApp };
