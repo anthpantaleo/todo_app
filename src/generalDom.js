@@ -14,7 +14,6 @@ const generalApp = (() => {
     const modalClose = document.querySelector(".modal-close");
     const taskSubmitButton = document.querySelector("#submitTask");
     const categoryInput = document.getElementById("category");
-    let categorySelect = document.querySelectorAll("[category]");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -188,7 +187,7 @@ const generalApp = (() => {
     // update Category Selectors and Loaders
 
     function loadCategorySelect() {
-      categorySelect = document.querySelectorAll("[category]");
+      let categorySelect = document.querySelectorAll("[category]");
       categorySelect.forEach((element) => {
         if (element.getAttribute("category") == selectedCategory) {
           element.classList.toggle("selectedView");
