@@ -6,13 +6,13 @@ class Category {
   }
 }
 
-let categories = [{ categoryname: "all" }, { categoryname: "work" }];
+let categories = [{ categoryname: "all tasks" }];
 
 const categoryDisplay = document.querySelector(".category-display");
+const categoriesInStorage = localStorage.getItem("categories") || [];
 
 const categoryModule = (() => {
   window.addEventListener("load", () => {
-    const categoriesInStorage = localStorage.getItem("categories") || [];
     const categoryInput = document.getElementById("category");
 
     categoryInput.addEventListener("change", (e) => {

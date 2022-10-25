@@ -2,6 +2,9 @@ import { createTask } from "./tasks";
 
 import TTask from "./task2";
 
+let tasks = [];
+let tasksInStorage = localStorage.getItem("tasks") || [];
+
 const generalApp = (() => {
   window.addEventListener("load", () => {
     // Initial DOM queries
@@ -21,10 +24,8 @@ const generalApp = (() => {
     // Storage
 
     const userName = localStorage.getItem("userName") || "";
-    const userTheme = localStorage.getItem("theme") || "";
-    const tasksInStorage = localStorage.getItem("tasksInStorage") || "[]";
-
     nameImput.value = userName;
+    const userTheme = localStorage.getItem("theme") || "";
 
     nameImput.addEventListener("change", (e) => {
       localStorage.setItem("userName", e.target.value);
@@ -95,11 +96,10 @@ const generalApp = (() => {
         taskinputDescription.value = null;
         taskinputDue.value = null;
 
-        let temptTasks =
-          JSON.parse(localStorage.getItem("tasksInStorage")) || [];
-        temptTasks.push(currentCreateTask);
+        tasks.push(currentCreateTask);
 
-        localStorage.setItem("tasksInStroage", JSON.stringify(temptTasks));
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+
         taskModal.classList.remove("active");
       } else {
         taskModal.classList.remove("active");
