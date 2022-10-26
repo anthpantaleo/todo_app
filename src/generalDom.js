@@ -66,6 +66,8 @@ const initialLoad = (() => {
       localStorage.setItem("categories", JSON.stringify(categories));
 
       renderCategories();
+      updateDom();
+      changeSelectedOnScreenCSS();
     });
 
     // Open Add Task Modal
@@ -87,6 +89,8 @@ const initialLoad = (() => {
       info.textContent = `It's ${currentDate.toDateString()}, ${currentTime}`;
     }, 1000);
   });
+
+  // Category Switcher
 })();
 
 // Load Categories to DOM
@@ -179,6 +183,7 @@ function renderCategories() {
     categoryDisplay.appendChild(categoryButton);
   });
   updateDom();
+  console.log(selectedCategory);
 }
 
 // update Category Selectors and Loaders
@@ -201,14 +206,6 @@ function deleteCategories(x) {
   }
 }
 
-categoryButton.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    let selected = e.target.getAttribute("category");
-    selectedCategory = selected;
-    changeSelectedOnScreenCSS();
-  });
-});
-
 function changeSelectedOnScreenCSS() {
   categoryButton.forEach((button) => {
     if (button.getAttribute("category") == selectedCategory) {
@@ -218,5 +215,14 @@ function changeSelectedOnScreenCSS() {
     }
   });
 }
+
+categoryButton.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    selectedCategory = e.target.getAttribute("category");
+    changeSelectedOnScreenCSS();
+  });
+});
+
+changeSelectedOnScreenCSS();
 
 export { initialLoad, updateDom };
