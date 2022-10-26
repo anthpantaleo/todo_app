@@ -18,7 +18,7 @@ const generalApp = (() => {
     // Initial Date Update
     let initialDate = new Date();
     let initalTime = initialDate.toLocaleTimeString();
-    info.textContent = `${initialDate.toDateString()}, ${initalTime}`;
+    info.textContent = `It's ${initialDate.toDateString()}, ${initalTime}`;
 
     // Storage
 
@@ -98,7 +98,7 @@ const generalApp = (() => {
     setInterval(function getDisplayTime() {
       let currentDate = new Date();
       let currentTime = currentDate.toLocaleTimeString();
-      info.textContent = `${currentDate.toDateString()}, ${currentTime}`;
+      info.textContent = `It's ${currentDate.toDateString()}, ${currentTime}`;
     }, 1000);
 
     // Load Tasks
@@ -147,6 +147,8 @@ const generalApp = (() => {
         taskinput.value = null;
         taskinputDescription.value = null;
         taskinputDue.value = null;
+
+        console.table(tasks);
 
         taskModal.classList.remove("active");
       } else {
