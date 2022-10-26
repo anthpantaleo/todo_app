@@ -184,6 +184,7 @@ function renderCategories() {
   });
   updateDom();
   console.log(selectedCategory);
+  addCategorySwitcher();
 }
 
 // update Category Selectors and Loaders
@@ -216,12 +217,14 @@ function changeSelectedOnScreenCSS() {
   });
 }
 
-categoryButton.forEach((button) => {
-  button.addEventListener("click", (e) => {
-    selectedCategory = e.target.getAttribute("category");
-    changeSelectedOnScreenCSS();
+function addCategorySwitcher() {
+  categoryButton.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      selectedCategory = e.target.getAttribute("category");
+      changeSelectedOnScreenCSS();
+    });
   });
-});
+}
 
 changeSelectedOnScreenCSS();
 
