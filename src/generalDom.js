@@ -10,6 +10,7 @@ let taskModal = document.querySelector(".modal-bg");
 let modalClose = document.querySelector(".modal-close");
 let taskSubmitButton = document.querySelector("#submitTask");
 let categoryInput = document.getElementById("category");
+let categoryButton = document.querySelectorAll("[category]");
 
 const initialLoad = (() => {
   window.addEventListener("load", () => {
@@ -60,8 +61,10 @@ const initialLoad = (() => {
       );
       let categories = currentCategoriesInStorage;
       categories.push(current);
+      selectedCategory = e.target.value;
       categoryInput.value = "";
       localStorage.setItem("categories", JSON.stringify(categories));
+
       renderCategories();
     });
 
@@ -176,7 +179,6 @@ function renderCategories() {
     categoryDisplay.appendChild(categoryButton);
   });
   updateDom();
-  // loadCategorySelect();
 }
 
 // update Category Selectors and Loaders
@@ -189,6 +191,7 @@ function updateDom() {
   modalClose = document.querySelector(".modal-close");
   taskSubmitButton = document.querySelector("#submitTask");
   categoryInput = document.getElementById("category");
+  categoryButton = document.querySelectorAll("[category]");
 }
 
 // Delete Existing Categories
@@ -196,6 +199,24 @@ function deleteCategories(x) {
   while (x.firstChild) {
     x.removeChild(x.firstChild);
   }
+}
+
+categoryButton.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let selected = e.target.getAttribute("category");
+    selectedCategory = selected;
+    changeSelectedOnScreenCSS();
+  });
+});
+
+function changeSelectedOnScreenCSS() {
+  categoryButton.forEach((button) => {
+    if (button.getAttribute("category") == selectedCategory) {
+      button.classList.add("selectedView");
+    } else {
+      button.classList.remove("selectedView");
+    }
+  });
 }
 
 export { initialLoad, updateDom };
