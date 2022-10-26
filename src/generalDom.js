@@ -2,18 +2,18 @@ import TTask from "./task2";
 import Category from "./category";
 
 let selectedCategory = "all tasks";
+let nameImput = document.getElementById("name");
+let themeIcon = document.getElementById("icon");
+let info = document.querySelector(".info");
+let addTaskButton = document.querySelector(".create");
+let taskModal = document.querySelector(".modal-bg");
+let modalClose = document.querySelector(".modal-close");
+let taskSubmitButton = document.querySelector("#submitTask");
+let categoryInput = document.getElementById("category");
 
 const generalApp = (() => {
   window.addEventListener("load", () => {
     // Initial DOM queries
-    const nameImput = document.getElementById("name");
-    const themeIcon = document.getElementById("icon");
-    const info = document.querySelector(".info");
-    const addTaskButton = document.querySelector(".create");
-    const taskModal = document.querySelector(".modal-bg");
-    const modalClose = document.querySelector(".modal-close");
-    const taskSubmitButton = document.querySelector("#submitTask");
-    const categoryInput = document.getElementById("category");
 
     // Initial Date Update
     let initialDate = new Date();
@@ -132,7 +132,7 @@ const generalApp = (() => {
           taskinputDescription.value,
           taskinputDue.value,
           taskinputPriority.value,
-          "categoryplaceholder",
+          selectedCategory,
           id
         );
 
@@ -173,7 +173,8 @@ const generalApp = (() => {
         }
         categoryDisplay.appendChild(categoryButton);
       });
-      loadCategorySelect();
+      updateDom();
+      // loadCategorySelect();
     }
 
     // Delete Existing Categories
@@ -185,18 +186,18 @@ const generalApp = (() => {
     }
 
     // update Category Selectors and Loaders
-
-    function loadCategorySelect() {
-      let categorySelect = document.querySelectorAll("[category]");
-      categorySelect.forEach((element) => {
-        if (element.getAttribute("category") == selectedCategory) {
-          element.classList.toggle("selectedView");
-        } else {
-          element.classList.remove("selectedView");
-        }
-      });
-    }
   });
 })();
+
+function updateDom() {
+  nameImput = document.getElementById("name");
+  themeIcon = document.getElementById("icon");
+  info = document.querySelector(".info");
+  addTaskButton = document.querySelector(".create");
+  taskModal = document.querySelector(".modal-bg");
+  modalClose = document.querySelector(".modal-close");
+  taskSubmitButton = document.querySelector("#submitTask");
+  categoryInput = document.getElementById("category");
+}
 
 export { generalApp };
