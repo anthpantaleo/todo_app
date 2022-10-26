@@ -34,9 +34,10 @@ const initialLoad = (() => {
 
     if (localStorage.getItem("theme") == "dark-theme") {
       document.body.classList.toggle("dark-theme");
-      themeIcon.src = "../dist/images/sunpixel.png";
+      themeIcon.src = "./images/sunpixel.png";
     } else {
       localStorage.setItem("theme", "normal");
+      themeIcon.src = "./images/half-moon.png";
     }
 
     // Theme Changer
