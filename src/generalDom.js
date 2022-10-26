@@ -1,6 +1,9 @@
 import TTask from "./task2";
 import Category from "./category";
 
+import moon from "./imgs/half-moon.png";
+import sun from "./imgs/sunpixel.png";
+
 let selectedCategory = "all tasks";
 let nameImput = document.getElementById("name");
 let themeIcon = document.getElementById("icon");
@@ -34,10 +37,10 @@ const initialLoad = (() => {
 
     if (localStorage.getItem("theme") == "dark-theme") {
       document.body.classList.toggle("dark-theme");
-      themeIcon.src = "./images/sunpixel.png";
+      themeIcon.src = sun;
     } else {
       localStorage.setItem("theme", "normal");
-      themeIcon.src = "./images/half-moon.png";
+      themeIcon.src = moon;
     }
 
     // Theme Changer
@@ -45,10 +48,10 @@ const initialLoad = (() => {
     themeIcon.onclick = function () {
       document.body.classList.toggle("dark-theme");
       if (document.body.classList.contains("dark-theme")) {
-        themeIcon.src = "../dist/images/sunpixel.png";
+        themeIcon.src = sun;
         localStorage.setItem("theme", "dark-theme");
       } else {
-        themeIcon.src = "../dist/images/half-moon.png";
+        themeIcon.src = moon;
         localStorage.setItem("theme", "normal");
       }
     };
