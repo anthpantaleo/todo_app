@@ -1,2 +1,2 @@
 import "./styles.css";
-import { generalApp } from "./generalDom";
+import { initialLoad } from "./generalDom";

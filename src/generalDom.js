@@ -11,10 +11,8 @@ let modalClose = document.querySelector(".modal-close");
 let taskSubmitButton = document.querySelector("#submitTask");
 let categoryInput = document.getElementById("category");
 
-const generalApp = (() => {
+const initialLoad = (() => {
   window.addEventListener("load", () => {
-    // Initial DOM queries
-
     // Initial Date Update
     let initialDate = new Date();
     let initalTime = initialDate.toLocaleTimeString();
@@ -67,21 +65,6 @@ const generalApp = (() => {
       renderCategories();
     });
 
-    // Load Categories to DOM
-
-    function loadCategories() {
-      if (localStorage.getItem("categories")) {
-      } else {
-        localStorage.setItem(
-          "categories",
-          JSON.stringify([{ categoryname: "all tasks" }])
-        );
-      }
-      renderCategories();
-    }
-
-    loadCategories();
-
     // Open Add Task Modal
 
     addTaskButton.addEventListener("click", function (e) {
@@ -100,97 +83,103 @@ const generalApp = (() => {
       let currentTime = currentDate.toLocaleTimeString();
       info.textContent = `It's ${currentDate.toDateString()}, ${currentTime}`;
     }, 1000);
-
-    // Load Tasks
-
-    function loadTasks() {
-      if (localStorage.getItem("tasks")) {
-      } else {
-        localStorage.setItem("tasks", JSON.stringify([]));
-      }
-    }
-
-    loadTasks();
-
-    // Task Submit to Create Task
-
-    taskSubmitButton.addEventListener("click", function (ev) {
-      ev.preventDefault();
-
-      let taskinput = document.querySelector("#taskinput");
-      let taskinputDescription = document.querySelector("#descinput");
-      let taskinputDue = document.querySelector("#duedate");
-      let taskinputPriority = document.querySelector(
-        'input[name="priority"]:checked'
-      );
-
-      let tasklength = taskinput.value.length;
-      let id = Math.floor(Math.random() * 100000);
-      if (tasklength >= 1) {
-        let currentCreateTask = new TTask(
-          taskinput.value,
-          taskinputDescription.value,
-          taskinputDue.value,
-          taskinputPriority.value,
-          selectedCategory,
-          id
-        );
-
-        let currentTasksInStorage = JSON.parse(localStorage.getItem("tasks"));
-
-        let tasks = currentTasksInStorage;
-
-        tasks.push(currentCreateTask);
-
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-
-        taskinput.value = null;
-        taskinputDescription.value = null;
-        taskinputDue.value = null;
-
-        console.table(tasks);
-
-        taskModal.classList.remove("active");
-      } else {
-        taskModal.classList.remove("active");
-      }
-    });
-
-    // Render Categories
-
-    function renderCategories() {
-      const categoryDisplay = document.querySelector(".category-display");
-      deleteCategories(categoryDisplay);
-      let currentCategories = JSON.parse(localStorage.getItem("categories"));
-      currentCategories.forEach((element) => {
-        let categoryButton = document.createElement("button");
-        categoryButton.classList.add("category");
-        categoryButton.setAttribute("category", `${element.categoryname}`);
-        categoryButton.innerText = element.categoryname;
-        if (element.categoryname != "all tasks") {
-          let categoryDeleteSpan = document.createElement("span");
-          categoryDeleteSpan.classList.add("categorydelete");
-          categoryDeleteSpan.innerText = "X";
-          categoryButton.appendChild(categoryDeleteSpan);
-        }
-        categoryDisplay.appendChild(categoryButton);
-      });
-      updateDom();
-      // loadCategorySelect();
-    }
-
-    // Delete Existing Categories
-
-    function deleteCategories(x) {
-      while (x.firstChild) {
-        x.removeChild(x.firstChild);
-      }
-    }
-
-    // update Category Selectors and Loaders
   });
 })();
 
+// Load Categories to DOM
+
+function loadCategories() {
+  if (localStorage.getItem("categories")) {
+  } else {
+    localStorage.setItem(
+      "categories",
+      JSON.stringify([{ categoryname: "all tasks" }])
+    );
+  }
+  renderCategories();
+}
+
+loadCategories();
+
+// Load Tasks
+
+function loadTasks() {
+  if (localStorage.getItem("tasks")) {
+  } else {
+    localStorage.setItem("tasks", JSON.stringify([]));
+  }
+}
+
+loadTasks();
+
+// Task Submit to Create Task
+
+taskSubmitButton.addEventListener("click", function (ev) {
+  ev.preventDefault();
+
+  let taskinput = document.querySelector("#taskinput");
+  let taskinputDescription = document.querySelector("#descinput");
+  let taskinputDue = document.querySelector("#duedate");
+  let taskinputPriority = document.querySelector(
+    'input[name="priority"]:checked'
+  );
+
+  let tasklength = taskinput.value.length;
+  let id = Math.floor(Math.random() * 100000);
+  if (tasklength >= 1) {
+    let currentCreateTask = new TTask(
+      taskinput.value,
+      taskinputDescription.value,
+      taskinputDue.value,
+      taskinputPriority.value,
+      selectedCategory,
+      id
+    );
+
+    let currentTasksInStorage = JSON.parse(localStorage.getItem("tasks"));
+
+    let tasks = currentTasksInStorage;
+
+    tasks.push(currentCreateTask);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    taskinput.value = null;
+    taskinputDescription.value = null;
+    taskinputDue.value = null;
+
+    console.table(tasks);
+
+    taskModal.classList.remove("active");
+  } else {
+    taskModal.classList.remove("active");
+  }
+});
+
+// Render Categories
+
+function renderCategories() {
+  const categoryDisplay = document.querySelector(".category-display");
+  deleteCategories(categoryDisplay);
+  let currentCategories = JSON.parse(localStorage.getItem("categories"));
+  currentCategories.forEach((element) => {
+    let categoryButton = document.createElement("button");
+    categoryButton.classList.add("category");
+    categoryButton.setAttribute("category", `${element.categoryname}`);
+    categoryButton.innerText = element.categoryname;
+    if (element.categoryname != "all tasks") {
+      let categoryDeleteSpan = document.createElement("span");
+      categoryDeleteSpan.classList.add("categorydelete");
+      categoryDeleteSpan.innerText = "X";
+      categoryButton.appendChild(categoryDeleteSpan);
+    }
+    categoryDisplay.appendChild(categoryButton);
+  });
+  updateDom();
+  // loadCategorySelect();
+}
+
+// update Category Selectors and Loaders
 function updateDom() {
   nameImput = document.getElementById("name");
   themeIcon = document.getElementById("icon");
@@ -202,4 +191,11 @@ function updateDom() {
   categoryInput = document.getElementById("category");
 }
 
-export { generalApp };
+// Delete Existing Categories
+function deleteCategories(x) {
+  while (x.firstChild) {
+    x.removeChild(x.firstChild);
+  }
+}
+
+export { initialLoad, updateDom };
