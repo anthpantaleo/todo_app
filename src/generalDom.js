@@ -187,7 +187,6 @@ function renderCategories() {
     categoryDisplay.appendChild(categoryButton);
   });
   updateDom();
-  console.log(selectedCategory);
   addCategorySwitcher();
 }
 
@@ -215,6 +214,7 @@ function changeSelectedOnScreenCSS() {
   categoryButton.forEach((button) => {
     if (button.getAttribute("category") == selectedCategory) {
       button.classList.add("selectedView");
+      console.log(button.getAttribute("category"));
     } else {
       button.classList.remove("selectedView");
     }
@@ -232,4 +232,4 @@ function addCategorySwitcher() {
 
 changeSelectedOnScreenCSS();
 
-export { initialLoad, updateDom };
+export { initialLoad };
