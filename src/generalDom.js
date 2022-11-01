@@ -191,6 +191,7 @@ function renderCategories() {
 }
 
 // update Category Selectors and Loaders
+
 function updateDom() {
   nameImput = document.getElementById("name");
   themeIcon = document.getElementById("icon");
