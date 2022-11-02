@@ -166,6 +166,7 @@ taskSubmitButton.addEventListener("click", function (ev) {
   } else {
     taskModal.classList.remove("active");
   }
+  renderTasks(selectedCategory);
 });
 
 // Render Categories
@@ -259,10 +260,19 @@ function deleteCategory(e) {
   });
   localStorage.setItem("categories", JSON.stringify(currentCategories));
   renderCategories();
+  deleteCategoryTasks(selectedCategory);
 }
 
 function renderTasks(e) {
   console.log(`Render Tasks: ${e}`);
 }
+
+function deleteCategoryTasks(e) {
+  console.log(`Delete Tasks: ${e}`);
+}
+
+function deleteTask(e) {}
+
+function editTask(e) {}
 
 export { initialLoad };
