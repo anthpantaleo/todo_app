@@ -219,6 +219,7 @@ function changeSelectedOnScreenCSS() {
   categoryButton.forEach((button) => {
     if (button.getAttribute("category") == selectedCategory) {
       button.classList.add("selectedView");
+      renderTasks(selectedCategory);
     } else {
       button.classList.remove("selectedView");
     }
@@ -239,6 +240,7 @@ changeSelectedOnScreenCSS();
 function categoryDeleteListener() {
   deleteCategoryButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
+      selectedCategory = "all tasks";
       deleteCategory(e);
     });
   });
@@ -257,6 +259,10 @@ function deleteCategory(e) {
   });
   localStorage.setItem("categories", JSON.stringify(currentCategories));
   renderCategories();
+}
+
+function renderTasks(e) {
+  console.log(`Render Tasks: ${e}`);
 }
 
 export { initialLoad };
