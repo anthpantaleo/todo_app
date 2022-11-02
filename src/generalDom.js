@@ -15,8 +15,6 @@ let taskSubmitButton = document.querySelector("#submitTask");
 let categoryInput = document.getElementById("category");
 let categoryButton = document.querySelectorAll("[category]");
 let deleteCategoryButtons = document.querySelectorAll(".categorydelete");
-let deleteButtons = document.querySelectorAll(".deletetaskbutton");
-let editButtons = document.querySelectorAll(".edittaskbutton");
 
 const initialLoad = (() => {
   window.addEventListener("load", () => {
@@ -139,7 +137,7 @@ taskSubmitButton.addEventListener("click", function (ev) {
   );
 
   let tasklength = taskinput.value.length;
-  let id = Math.floor(Math.random() * 100000);
+  let id = Math.floor(Math.random() * 1000000);
   if (tasklength >= 1) {
     let currentCreateTask = new TTask(
       taskinput.value,
@@ -161,8 +159,6 @@ taskSubmitButton.addEventListener("click", function (ev) {
     taskinput.value = null;
     taskinputDescription.value = null;
     taskinputDue.value = null;
-
-    console.table(tasks);
 
     taskModal.classList.remove("active");
   } else {
@@ -380,12 +376,19 @@ function renderTasks(e) {
       taskbox.appendChild(taskcategorydisplay);
 
       taskDisplay.appendChild(taskbox);
+      updateDom();
       addTaskEventListeners();
     }
   });
 }
 
-function deleteTask(e) {}
+function deleteTask(e) {
+  const ID = e.target.getAttribute("id");
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const newTasks = tasks.filter((task) => task.id != ID);
+  localStorage.setItem("tasks", JSON.stringify(newTasks));
+  renderTasks();
+}
 
 function editTask(e) {}
 
@@ -397,11 +400,11 @@ function deleteOnScreenTasks() {
 }
 
 function addTaskEventListeners() {
-  deleteButtons = document.querySelectorAll(".deletetaskbutton");
-  editButtons = document.querySelectorAll(".edittaskbutton");
+  let deleteButtons = document.querySelectorAll(".deletetaskbutton");
+  let editButtons = document.querySelectorAll(".edittaskbutton");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
-      console.log(e.target.getAttribute("id") + " delete");
+      deleteTask(e);
     });
   });
 
