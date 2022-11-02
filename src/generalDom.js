@@ -15,6 +15,8 @@ let taskSubmitButton = document.querySelector("#submitTask");
 let categoryInput = document.getElementById("category");
 let categoryButton = document.querySelectorAll("[category]");
 let deleteCategoryButtons = document.querySelectorAll(".categorydelete");
+let deleteButtons = document.querySelectorAll(".deletetaskbutton");
+let editButtons = document.querySelectorAll(".edittaskbutton");
 
 const initialLoad = (() => {
   window.addEventListener("load", () => {
@@ -260,12 +262,11 @@ function deleteCategory(e) {
   });
   localStorage.setItem("categories", JSON.stringify(currentCategories));
   renderCategories();
-  deleteCategoryTasks(selectedCategory);
+  deleteOnScreenTasks();
 }
 
 function renderTasks(e) {
   deleteOnScreenTasks();
-  console.log(`Render Tasks: ${e}`);
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   const taskDisplay = document.querySelector(".taskdisplay");
   tasks.forEach((task) => {
@@ -314,12 +315,17 @@ function renderTasks(e) {
       editButton.classList.add("edittaskbutton");
       editButton.innerText = "Edit";
 
+      let taskcategorydisplay = document.createElement("span");
+      taskcategorydisplay.innerText = task.category;
+      taskcategorydisplay.classList.add("taskcategorydisplay");
+
       taskbox.appendChild(deletebutton);
       taskbox.appendChild(editButton);
+      taskbox.appendChild(taskcategorydisplay);
 
       taskDisplay.appendChild(taskbox);
 
-      // taskDisplay.appendChild(taskbox);
+      addTaskEventListeners();
     } else if (task.category == selectedCategory) {
       let taskbox = document.createElement("div");
       taskbox.classList.add("task");
@@ -365,16 +371,18 @@ function renderTasks(e) {
       editButton.classList.add("edittaskbutton");
       editButton.innerText = "Edit";
 
+      let taskcategorydisplay = document.createElement("span");
+      taskcategorydisplay.innerText = task.category;
+      taskcategorydisplay.classList.add("taskcategorydisplay");
+
       taskbox.appendChild(deletebutton);
       taskbox.appendChild(editButton);
+      taskbox.appendChild(taskcategorydisplay);
 
       taskDisplay.appendChild(taskbox);
+      addTaskEventListeners();
     }
   });
-}
-
-function deleteCategoryTasks(e) {
-  console.log(`Delete Tasks: ${e}`);
 }
 
 function deleteTask(e) {}
@@ -386,6 +394,22 @@ function deleteOnScreenTasks() {
   while (taskDisplay.firstChild) {
     taskDisplay.removeChild(taskDisplay.firstChild);
   }
+}
+
+function addTaskEventListeners() {
+  deleteButtons = document.querySelectorAll(".deletetaskbutton");
+  editButtons = document.querySelectorAll(".edittaskbutton");
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      console.log(e.target.getAttribute("id") + " delete");
+    });
+  });
+
+  editButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      console.log(e.target.getAttribute("id") + " edit");
+    });
+  });
 }
 
 export { initialLoad };
