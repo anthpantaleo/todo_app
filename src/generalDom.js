@@ -306,17 +306,17 @@ function renderTasks(e) {
       deletebutton.classList.add("deletetaskbutton");
       deletebutton.innerText = "Delete";
 
-      let editButton = document.createElement("button");
-      editButton.setAttribute("id", task.id);
-      editButton.classList.add("edittaskbutton");
-      editButton.innerText = "Edit";
+      // let editButton = document.createElement("button");
+      // editButton.setAttribute("id", task.id);
+      // editButton.classList.add("edittaskbutton");
+      // editButton.innerText = "Edit";
 
       let taskcategorydisplay = document.createElement("span");
       taskcategorydisplay.innerText = task.category;
       taskcategorydisplay.classList.add("taskcategorydisplay");
 
       taskbox.appendChild(deletebutton);
-      taskbox.appendChild(editButton);
+      // taskbox.appendChild(editButton);
       taskbox.appendChild(taskcategorydisplay);
 
       taskDisplay.appendChild(taskbox);
@@ -362,17 +362,17 @@ function renderTasks(e) {
       deletebutton.classList.add("deletetaskbutton");
       deletebutton.innerText = "Delete";
 
-      let editButton = document.createElement("button");
-      editButton.setAttribute("id", task.id);
-      editButton.classList.add("edittaskbutton");
-      editButton.innerText = "Edit";
+      // let editButton = document.createElement("button");
+      // editButton.setAttribute("id", task.id);
+      // editButton.classList.add("edittaskbutton");
+      // editButton.innerText = "Edit";
 
       let taskcategorydisplay = document.createElement("span");
       taskcategorydisplay.innerText = task.category;
       taskcategorydisplay.classList.add("taskcategorydisplay");
 
       taskbox.appendChild(deletebutton);
-      taskbox.appendChild(editButton);
+      // taskbox.appendChild(editButton);
       taskbox.appendChild(taskcategorydisplay);
 
       taskDisplay.appendChild(taskbox);
@@ -390,7 +390,7 @@ function deleteTask(e) {
   renderTasks();
 }
 
-function editTask(e) {}
+// function editTask(e) {}
 
 function deleteOnScreenTasks() {
   const taskDisplay = document.querySelector(".taskdisplay");
@@ -401,18 +401,18 @@ function deleteOnScreenTasks() {
 
 function addTaskEventListeners() {
   let deleteButtons = document.querySelectorAll(".deletetaskbutton");
-  let editButtons = document.querySelectorAll(".edittaskbutton");
+  // let editButtons = document.querySelectorAll(".edittaskbutton");
   deleteButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       deleteTask(e);
     });
   });
 
-  editButtons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      console.log(e.target.getAttribute("id") + " edit");
-    });
-  });
+  // editButtons.forEach((button) => {
+  //   button.addEventListener("click", (e) => {
+  //     console.log(e.target.getAttribute("id") + " edit");
+  //   });
+  // });
 }
 
 export { initialLoad };
