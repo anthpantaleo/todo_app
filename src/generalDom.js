@@ -264,7 +264,113 @@ function deleteCategory(e) {
 }
 
 function renderTasks(e) {
+  deleteOnScreenTasks();
   console.log(`Render Tasks: ${e}`);
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const taskDisplay = document.querySelector(".taskdisplay");
+  tasks.forEach((task) => {
+    if (selectedCategory == "all tasks") {
+      let taskbox = document.createElement("div");
+      taskbox.classList.add("task");
+
+      let taskgeneral = document.createElement("div");
+      taskgeneral.classList.add("taskgeneral");
+
+      let tasktitle = document.createElement("div");
+      tasktitle.classList.add("tasktitle");
+      tasktitle.innerText = `${task.name}`;
+
+      let taskdescription = document.createElement("div");
+      taskdescription.classList.add("taskdescription");
+      taskdescription.innerText = `${task.description}`;
+
+      taskgeneral.appendChild(tasktitle);
+      taskgeneral.appendChild(taskdescription);
+      taskbox.appendChild(taskgeneral);
+
+      let taskinfo = document.createElement("div");
+      taskinfo.classList.add("taskinfo");
+
+      let taskpriority = document.createElement("div");
+      taskpriority.classList.add("taskpriority");
+      taskpriority.innerText = task.priority;
+
+      let taskdate = document.createElement("div");
+      taskdate.classList.add("taskdate");
+      taskdate.innerText = task.dueDate;
+
+      taskinfo.appendChild(taskpriority);
+      taskinfo.appendChild(taskdate);
+
+      taskbox.appendChild(taskinfo);
+
+      let deletebutton = document.createElement("button");
+      deletebutton.setAttribute("id", task.id);
+      deletebutton.classList.add("deletetaskbutton");
+      deletebutton.innerText = "Delete";
+
+      let editButton = document.createElement("button");
+      editButton.setAttribute("id", task.id);
+      editButton.classList.add("edittaskbutton");
+      editButton.innerText = "Edit";
+
+      taskbox.appendChild(deletebutton);
+      taskbox.appendChild(editButton);
+
+      taskDisplay.appendChild(taskbox);
+
+      // taskDisplay.appendChild(taskbox);
+    } else if (task.category == selectedCategory) {
+      let taskbox = document.createElement("div");
+      taskbox.classList.add("task");
+
+      let taskgeneral = document.createElement("div");
+      taskgeneral.classList.add("taskgeneral");
+
+      let tasktitle = document.createElement("div");
+      tasktitle.classList.add("tasktitle");
+      tasktitle.innerText = `${task.name}`;
+
+      let taskdescription = document.createElement("div");
+      taskdescription.classList.add("taskdescription");
+      taskdescription.innerText = `${task.description}`;
+
+      taskgeneral.appendChild(tasktitle);
+      taskgeneral.appendChild(taskdescription);
+      taskbox.appendChild(taskgeneral);
+
+      let taskinfo = document.createElement("div");
+      taskinfo.classList.add("taskinfo");
+
+      let taskpriority = document.createElement("div");
+      taskpriority.classList.add("taskpriority");
+      taskpriority.innerText = task.priority;
+
+      let taskdate = document.createElement("div");
+      taskdate.classList.add("taskdate");
+      taskdate.innerText = task.dueDate;
+
+      taskinfo.appendChild(taskpriority);
+      taskinfo.appendChild(taskdate);
+
+      taskbox.appendChild(taskinfo);
+
+      let deletebutton = document.createElement("button");
+      deletebutton.setAttribute("id", task.id);
+      deletebutton.classList.add("deletetaskbutton");
+      deletebutton.innerText = "Delete";
+
+      let editButton = document.createElement("button");
+      editButton.setAttribute("id", task.id);
+      editButton.classList.add("edittaskbutton");
+      editButton.innerText = "Edit";
+
+      taskbox.appendChild(deletebutton);
+      taskbox.appendChild(editButton);
+
+      taskDisplay.appendChild(taskbox);
+    }
+  });
 }
 
 function deleteCategoryTasks(e) {
@@ -274,5 +380,12 @@ function deleteCategoryTasks(e) {
 function deleteTask(e) {}
 
 function editTask(e) {}
+
+function deleteOnScreenTasks() {
+  const taskDisplay = document.querySelector(".taskdisplay");
+  while (taskDisplay.firstChild) {
+    taskDisplay.removeChild(taskDisplay.firstChild);
+  }
+}
 
 export { initialLoad };

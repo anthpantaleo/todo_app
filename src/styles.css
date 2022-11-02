@@ -217,10 +217,45 @@ form input {
 
 .taskdisplay {
   padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .category-display {
   flex-wrap: wrap;
+}
+
+.task {
+  border: 4px solid var(--secondary-color);
+  padding: 2px 2px;
+  gap: 0;
+}
+
+.taskgeneral {
+  display: flex;
+  gap: 15px;
+}
+
+.taskinfo {
+  display: flex;
+  gap: 15px;
+}
+
+.task button {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  border: none;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid var(--secondary-color);
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.task button:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 @media only screen and (max-width: 400px) {
