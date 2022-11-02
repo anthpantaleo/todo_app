@@ -14,6 +14,7 @@ let modalClose = document.querySelector(".modal-close");
 let taskSubmitButton = document.querySelector("#submitTask");
 let categoryInput = document.getElementById("category");
 let categoryButton = document.querySelectorAll("[category]");
+let deleteCategoryButtons = document.querySelectorAll(".categorydelete");
 
 const initialLoad = (() => {
   window.addEventListener("load", () => {
@@ -181,6 +182,7 @@ function renderCategories() {
     if (element.categoryname != "all tasks") {
       let categoryDeleteSpan = document.createElement("span");
       categoryDeleteSpan.classList.add("categorydelete");
+      categoryDeleteSpan.setAttribute("id", element.categoryname);
       categoryDeleteSpan.innerText = "X";
       categoryButton.appendChild(categoryDeleteSpan);
     }
@@ -188,6 +190,7 @@ function renderCategories() {
   });
   updateDom();
   addCategorySwitcher();
+  categoryDeleteListener();
 }
 
 // update Category Selectors and Loaders
@@ -202,6 +205,7 @@ function updateDom() {
   taskSubmitButton = document.querySelector("#submitTask");
   categoryInput = document.getElementById("category");
   categoryButton = document.querySelectorAll("[category]");
+  deleteCategoryButtons = document.querySelectorAll(".categorydelete");
 }
 
 // Delete Existing Categories
@@ -215,7 +219,6 @@ function changeSelectedOnScreenCSS() {
   categoryButton.forEach((button) => {
     if (button.getAttribute("category") == selectedCategory) {
       button.classList.add("selectedView");
-      console.log(button.getAttribute("category"));
     } else {
       button.classList.remove("selectedView");
     }
@@ -232,5 +235,28 @@ function addCategorySwitcher() {
 }
 
 changeSelectedOnScreenCSS();
+
+function categoryDeleteListener() {
+  deleteCategoryButtons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      deleteCategory(e);
+    });
+  });
+}
+
+function deleteCategory(e) {
+  const currentCategories = JSON.parse(localStorage.getItem("categories"));
+  const selectedCategory = e.target.id;
+  let count = 0;
+  currentCategories.forEach((category) => {
+    if (category.categoryname == selectedCategory) {
+      currentCategories.splice(count, 1);
+    } else {
+      count++;
+    }
+  });
+  localStorage.setItem("categories", JSON.stringify(currentCategories));
+  renderCategories();
+}
 
 export { initialLoad };
